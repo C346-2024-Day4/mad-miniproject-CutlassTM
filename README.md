@@ -18,18 +18,23 @@ This app is a Watchlist Management Tool built with React Native, designed to hel
 -----------
 
 Figma Low-Fi of the app:
+
 (https://www.figma.com/design/hqKHMGdWkw93G3viQg1fpE/C347---L07_CA_App?node-id=0-1&t=CjnvRmFoIYuw3rgX-1)
+
 
 Screenshots of the app:
  
 Home Page:
+
 ![Home](https://github.com/user-attachments/assets/f76c7228-b324-40e3-93b1-a54861173836)
 
 Add/Edit Page:
+
 ![Add](https://github.com/user-attachments/assets/1dca5154-ae87-4984-b751-768d5a3a5019)
 ![Edit](https://github.com/user-attachments/assets/033a3f6b-eb7f-40eb-84da-5c9eefdaef92)
 
 Stats Feature:
+
 ![Stats](https://github.com/user-attachments/assets/b63c1c80-93d6-44db-a2c4-ffe8e3ddbf77)
 
  
