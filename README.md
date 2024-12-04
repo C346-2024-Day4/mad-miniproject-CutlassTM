@@ -44,5 +44,7 @@ Video walkthrough of the app:
  
 ------------
  
-Feel free to download this app to your phone:
-Link to APK file of the app: [Download APK](./docs/app-release.apk)[Uploading output.apks…]()
+### Feel free to download this app to your phone
+
+APK file of the app: [app.zip](https://github.com/user-attachments/files/18005863/app.zip)
+
