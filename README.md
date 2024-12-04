@@ -10,14 +10,10 @@ This app is a Watchlist Management Tool built with React Native, designed to hel
  
 - Categorized Watchlist: Organize movies or TV shows into predefined categories for easy navigation.
 - Add New Items: Fill in details like title, description, rating (1–10), type (Movie/TV Show), and watched status.
-
-Edit Existing Entries: Modify details of any watchlist item, ensuring your list stays up-to-date.
-
-Delete Items: Remove unwanted entries with a single click.
-
-Watchlist Statistics: Provides an overview of your watchlist, including total movies, watched vs. not watched counts, and a detailed list of movies you haven't watched yet.
-
-User-Friendly Navigation: Smooth transitions between Home, Add, and Edit screens using react-navigation.
+- Edit Existing Entries: Modify details of any watchlist item, ensuring your list stays up-to-date.
+- Delete Items: Remove unwanted entries with a single click.
+- Watchlist Statistics: Provides an overview of your watchlist, including total movies, watched vs. not watched counts, and a detailed list of movies you haven't watched yet.
+- User-Friendly Navigation: Smooth transitions between Home, Add, and Edit screens using react-navigation.
  
 -----------
 
