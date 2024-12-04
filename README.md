@@ -8,9 +8,8 @@ This app is a Watchlist Management Tool built with React Native, designed to hel
  
 ### Notable features of the app
  
-Categorized Watchlist: Organize movies or TV shows into predefined categories for easy navigation.
-
-Add New Items: Fill in details like title, description, rating (1–10), type (Movie/TV Show), and watched status.
+- Categorized Watchlist: Organize movies or TV shows into predefined categories for easy navigation.
+- Add New Items: Fill in details like title, description, rating (1–10), type (Movie/TV Show), and watched status.
 
 Edit Existing Entries: Modify details of any watchlist item, ensuring your list stays up-to-date.
 
