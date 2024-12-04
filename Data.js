@@ -25,15 +25,31 @@ const watchlistData = [
                 img: 'https://upload.wikimedia.org/wikipedia/en/c/ca/Die_Hard_%281988_film%29_poster.jpg',
                 desc: 'A cop fights terrorists in a skyscraper on Christmas Eve.',
                 type: 'Movie',
-                rating: 8.2,
+                rating: 0,
                 watched: false
+            },
+            {
+                key: 'The Dark Knight',
+                img: 'https://upload.wikimedia.org/wikipedia/en/1/1c/The_Dark_Knight_%282008_film%29.jpg',
+                desc: 'Batman faces the Joker, a criminal mastermind.',
+                type: 'Movie',
+                rating: 9.0,
+                watched: true
+            },
+            {
+                key: 'The Matrix',
+                img: 'https://upload.wikimedia.org/wikipedia/en/c/c1/The_Matrix_Poster.jpg',
+                desc: 'A hacker discovers reality is an illusion controlled by machines.',
+                type: 'Movie',
+                rating: 8.7,
+                watched: true
             }
         ],
     },
     {
         title: 'Comedy 😂',
-        bgcolor: '#FFD54F', // Bright golden-yellow
-        nameColor: '#795548', // Chocolate brown
+        bgcolor: '#FFD54F',
+        nameColor: '#795548',
         data: [
             {
                 key: 'The Boys',
@@ -57,6 +73,22 @@ const watchlistData = [
                 desc: 'Two friends face wild events trying to impress classmates.',
                 type: 'Movie',
                 rating: 7.6,
+                watched: true
+            },
+            {
+                key: 'The Office',
+                img: 'https://upload.wikimedia.org/wikipedia/en/3/32/The_Office_S9_DVD.jpg',
+                desc: 'A mockumentary about employees at a mundane office.',
+                type: 'TV Show',
+                rating: 8.9,
+                watched: true
+            },
+            {
+                key: 'Parks and Recreation',
+                img: 'https://upload.wikimedia.org/wikipedia/en/c/cc/Parks_and_Recreation_%28season_7%29_DVD_coverart_-_Mar_2015.jpg',
+                desc: 'A quirky group of public employees navigate government.',
+                type: 'TV Show',
+                rating: 8.6,
                 watched: true
             }
         ],
@@ -89,6 +121,22 @@ const watchlistData = [
                 type: 'Movie',
                 rating: 8.1,
                 watched: true
+            },
+            {
+                key: 'Sherlock Holmes',
+                img: 'https://m.media-amazon.com/images/I/51MrbWAYe+L._AC_.jpg',
+                desc: 'Sherlock and Watson investigate a dark conspiracy.',
+                type: 'Movie',
+                rating: 7.6,
+                watched: true
+            },
+            {
+                key: 'The Girl with the Dragon Tattoo',
+                img: 'https://upload.wikimedia.org/wikipedia/en/8/80/The_Girl_with_the_Dragon_Tattoo_Poster.jpg',
+                desc: 'A hacker and a journalist investigate a missing heiress.',
+                type: 'Movie',
+                rating: 7.8,
+                watched: true
             }
         ],
     },
@@ -119,7 +167,23 @@ const watchlistData = [
                 desc: 'A cursed videotape causes death seven days after viewing.',
                 type: 'Movie',
                 rating: 7.1,
-                watched: false
+                watched: true
+            },
+            {
+                key: 'It',
+                img: 'https://upload.wikimedia.org/wikipedia/en/5/5a/It_%282017%29_poster.jpg',
+                desc: 'A group of kids faces an ancient evil clown.',
+                type: 'Movie',
+                rating: 7.3,
+                watched: true
+            },
+            {
+                key: 'The Haunting of Hill House',
+                img: 'https://i.ebayimg.com/images/g/~b8AAOSw-s5eAncM/s-l1600.webp',
+                desc: 'A family confronts supernatural forces haunting them.',
+                type: 'TV Show',
+                rating: 8.6,
+                watched: true
             }
         ],
     },
@@ -138,7 +202,7 @@ const watchlistData = [
             },
             {
                 key: 'The Witcher',
-                img: 'https://upload.wikimedia.org/wikipedia/en/3/33/Wiedzmin_1990.png',
+                img: 'https://m.media-amazon.com/images/I/61cfVEgHXlL._AC_SX522_.jpg',
                 desc: 'A monster hunter’s journey through a dangerous world.',
                 type: 'TV Show',
                 rating: 0,
@@ -150,6 +214,22 @@ const watchlistData = [
                 desc: 'A fellowship unites to destroy a powerful, evil ring.',
                 type: 'Movie',
                 rating: 8.8,
+                watched: true
+            },
+            {
+                key: 'Harry Potter and the Sorcerer\'s Stone',
+                img: 'https://upload.wikimedia.org/wikipedia/en/7/7a/Harry_Potter_and_the_Philosopher%27s_Stone_banner.jpg',
+                desc: 'A young boy discovers he is a wizard and attends a magical school.',
+                type: 'Movie',
+                rating: 7.6,
+                watched: true
+            },
+            {
+                key: 'Avatar: The Last Airbender',
+                img: 'https://www.posterhub.com.sg/images/detailed/132/103808_Avatar_Mastery_of_the_Elements_dsr0-08.jpg',
+                desc: 'A boy with elemental powers must save the world.',
+                type: 'TV Show',
+                rating: 9.3,
                 watched: true
             }
         ],
@@ -181,6 +261,22 @@ const watchlistData = [
                 desc: 'A love story tested by ambition and dreams.',
                 type: 'Movie',
                 rating: 8.0,
+                watched: true
+            },
+            {
+                key: 'The Fault in Our Stars',
+                img: 'https://upload.wikimedia.org/wikipedia/en/4/41/The_Fault_in_Our_Stars_%28Official_Film_Poster%29.png',
+                desc: 'Two teenagers with cancer fall in love.',
+                type: 'Movie',
+                rating: 7.7,
+                watched: true
+            },
+            {
+                key: 'Eternal Sunshine of the Spotless Mind',
+                img: 'https://upload.wikimedia.org/wikipedia/en/a/a4/Eternal_Sunshine_of_the_Spotless_Mind.png',
+                desc: 'A couple erases memories of each other after a breakup.',
+                type: 'Movie',
+                rating: 8.3,
                 watched: true
             }
         ],

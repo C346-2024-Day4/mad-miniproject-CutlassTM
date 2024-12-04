@@ -1,119 +1,120 @@
-import React, { useState, useEffect } from 'react';
-import { StyleSheet, Text, View, TextInput, Button, Switch } from 'react-native';
-import { watchlistData } from './Data.js';
+import React, { useState } from "react";
+import { View, TextInput, Text, Button, StatusBar, StyleSheet, ToastAndroid } from "react-native";
+import { RadioButton } from "react-native-paper";
+import { watchlistData } from "./Data";
 
-const Edit = ({ route, navigation }) => {
-    const { sectionIndex, itemIndex } = route.params || {};
-    const isEditing = sectionIndex !== undefined && itemIndex !== undefined;
+const Edit = ({ navigation, route }) => {
+    const { categoryIndex = 0, itemIndex = 0 } = route.params || {};
 
-    const [movieKey, setMovieKey] = useState('');
-    const [movieDesc, setMovieDesc] = useState('');
-    const [movieImg, setMovieImg] = useState('');
-    const [movieGenre, setMovieGenre] = useState('');
-    const [movieBgColor, setMovieBgColor] = useState('');
-    const [movieNameColor, setMovieNameColor] = useState('');
-    const [movieType, setMovieType] = useState('');
-    const [movieRating, setMovieRating] = useState('');
-    const [movieWatched, setMovieWatched] = useState(false);
+    const selectedCategory = watchlistData[categoryIndex];
+    const watchlistItem = selectedCategory?.data[itemIndex];
 
-    useEffect(() => {
-        if (isEditing) {
-            const movie = watchlistData[sectionIndex].data[itemIndex];
-            setMovieKey(movie.key);
-            setMovieDesc(movie.desc);
-            setMovieImg(movie.img);
-            setMovieGenre(movie.genre);
-            setMovieBgColor(movie.bgcolor);
-            setMovieNameColor(movie.nameColor);
-            setMovieType(movie.type);
-            setMovieRating(movie.rating);
-            setMovieWatched(movie.watched);
-        }
-    }, [isEditing, sectionIndex, itemIndex]);
+    if (!watchlistItem) {
+        return (
+            <View style={styles.container}>
+                <Text style={[styles.label, { color: "red" }]}>Invalid data provided!</Text>
+                <View style={styles.buttonWrapper}>
+                    <Button title="Go Back" onPress={() => navigation.navigate("Home")} />
+                </View>
+            </View>
+        );
+    }
 
-    const handleSave = () => {
-        const newMovie = {
-            key: movieKey,
-            desc: movieDesc,
-            img: movieImg,
-            genre: movieGenre,
-            bgcolor: movieBgColor,
-            nameColor: movieNameColor,
-            type: movieType,
-            rating: movieRating,
-            watched: movieWatched,
-        };
+    const [key, setKey] = useState(watchlistItem.key);
+    const [desc, setDesc] = useState(watchlistItem.desc);
+    const [rating, setRating] = useState(watchlistItem.rating.toString());
+    const [watched, setWatched] = useState(watchlistItem.watched);
 
-        if (isEditing) {
-            watchlistData[sectionIndex].data[itemIndex] = newMovie;
-        } else {
-            const newSection = { title: movieGenre, data: [newMovie] };
-            watchlistData.push(newSection);
+    const saveChanges = () => {
+        const numericRating = Number(rating);
+        if (!key || !desc || numericRating < 0 || numericRating > 10) {
+            ToastAndroid.show("Open your eyes and fill up form please.", ToastAndroid.SHORT);
+            return;
         }
 
-        navigation.goBack();
+        watchlistItem.key = key;
+        watchlistItem.desc = desc;
+        watchlistItem.rating = numericRating;
+        watchlistItem.watched = watched;
+
+        ToastAndroid.show("I gotchu, UPDATED for you!", ToastAndroid.SHORT);
+        navigation.navigate("Home");
+    };
+
+    const deleteEntry = () => {
+        ToastAndroid.show("So-long wat to watch!", ToastAndroid.SHORT);
+        selectedCategory.data.splice(itemIndex, 1);
+        navigation.navigate("Home");
     };
 
     return (
         <View style={styles.container}>
-            <Text style={styles.headerText}>{isEditing ? 'Edit Movie' : 'Add New Movie'}</Text>
+            <StatusBar style="light" />
+            <Text style={styles.headerText}>Edit Watchlist</Text>
+
+            <Text style={styles.label}>Title:</Text>
             <TextInput
                 style={styles.input}
-                value={movieKey}
-                onChangeText={setMovieKey}
-                placeholder="Movie Name"
+                onChangeText={setKey}
+                value={key}
+                placeholder="Enter Title"
+                placeholderTextColor="#888"
             />
+
+            <Text style={styles.label}>Description:</Text>
             <TextInput
-                style={styles.input}
-                value={movieDesc}
-                onChangeText={setMovieDesc}
-                placeholder="Movie Description"
+                style={[styles.input, { height: 100, textAlignVertical: "top" }]}
+                onChangeText={setDesc}
+                value={desc}
+                placeholder="Enter Description"
+                placeholderTextColor="#888"
+                multiline
             />
+
+            <Text style={styles.label}>Rating (0/1-10):</Text>
             <TextInput
                 style={styles.input}
-                value={movieImg}
-                onChangeText={setMovieImg}
-                placeholder="Image URL"
-            />
-            <TextInput
-                style={styles.input}
-                value={movieGenre}
-                onChangeText={setMovieGenre}
-                placeholder="Genre"
-            />
-            <TextInput
-                style={styles.input}
-                value={movieBgColor}
-                onChangeText={setMovieBgColor}
-                placeholder="Background Color"
-            />
-            <TextInput
-                style={styles.input}
-                value={movieNameColor}
-                onChangeText={setMovieNameColor}
-                placeholder="Name Color"
-            />
-            <TextInput
-                style={styles.input}
-                value={movieType}
-                onChangeText={setMovieType}
-                placeholder="Type"
-            />
-            <TextInput
-                style={styles.input}
-                value={movieRating}
-                onChangeText={setMovieRating}
-                placeholder="Rating"
+                value={rating}
+                onChangeText={(text) => {
+                    const numericValue = Number(text);
+                    if (!isNaN(numericValue) && numericValue >= 1 && numericValue <= 10) {
+                        setRating(text);
+                    }
+                }}
+                placeholder="Enter Rating"
+                placeholderTextColor="#888"
                 keyboardType="numeric"
+                maxLength={2}
             />
-            <View style={styles.switchContainer}>
-                <Text style={styles.switchLabel}>Watched:</Text>
-                <Switch
-                    value={movieWatched}
-                    onValueChange={setMovieWatched}
-                />
+
+            <Text style={styles.label}>Watched:</Text>
+            <View style={styles.radioGroup}>
+                <View style={styles.radioItem}>
+                    <RadioButton
+                        value={true}
+                        status={watched ? "checked" : "unchecked"}
+                        onPress={() => setWatched(true)}
+                    />
+                    <Text style={styles.radioLabel}>Watched</Text>
+                </View>
+                <View style={styles.radioItem}>
+                    <RadioButton
+                        value={false}
+                        status={!watched ? "checked" : "unchecked"}
+                        onPress={() => setWatched(false)}
+                    />
+                    <Text style={styles.radioLabel}>Not Watched</Text>
+                </View>
             </View>
-            <Button title="Save" onPress={handleSave} />
+
+            <View style={styles.buttonContainer}>
+                <View style={styles.buttonWrapper}>
+                    <Button title="Save" onPress={saveChanges} color="#FF6666" />
+                </View>
+                <View style={styles.buttonWrapper}>
+                    <Button title="Delete" onPress={deleteEntry} color="red" />
+                </View>
+            </View>
         </View>
     );
 };
@@ -121,31 +122,54 @@ const Edit = ({ route, navigation }) => {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        padding: 20,
-        backgroundColor: '#111',
+        backgroundColor: "#0D1F2D",
+        paddingHorizontal: 20,
+        paddingTop: 40,
     },
     headerText: {
-        fontSize: 24,
-        color: '#FF6666',
-        fontWeight: 'bold',
-        textAlign: 'center',
+        fontSize: 30,
+        color: "#ffffff",
+        fontWeight: "bold",
         marginBottom: 20,
+        textAlign: "center",
+    },
+    label: {
+        fontSize: 16,
+        color: "#ffffff",
+        marginTop: 10,
+        marginBottom: 5,
     },
     input: {
-        backgroundColor: '#333',
-        color: '#fff',
-        padding: 10,
-        marginBottom: 15,
+        backgroundColor: "#1A3A5A",
+        color: "#fff",
+        padding: 12,
+        marginBottom: 20,
         borderRadius: 8,
+        borderWidth: 1,
+        borderColor: "#4C7C9E",
     },
-    switchContainer: {
-        flexDirection: 'row',
-        alignItems: 'center',
+    radioGroup: {
+        flexDirection: "row",
+        justifyContent: "space-around",
         marginBottom: 20,
     },
-    switchLabel: {
-        color: '#fff',
-        fontSize: 18,
+    radioItem: {
+        flexDirection: "row",
+        alignItems: "center",
+    },
+    radioLabel: {
+        color: "#ffffff",
+        marginLeft: 5,
+        fontSize: 16,
+    },
+    buttonContainer: {
+        flexDirection: "row",
+        justifyContent: "space-between",
+        marginTop: 20,
+    },
+    buttonWrapper: {
+        flex: 1,
+        marginHorizontal: 5,
     },
 });
 

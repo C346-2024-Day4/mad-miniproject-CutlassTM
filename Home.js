@@ -8,25 +8,29 @@ export default function Home({ navigation }) {
     const [selectedCategory, setSelectedCategory] = useState('All');
     const [searchText, setSearchText] = useState('');
 
-    // Function to calculate watched and not watched movies
     const calculateStats = () => {
+        let totalMovies = 0;
         let watchedCount = 0;
         let notWatchedCount = 0;
+        let notWatchedMovies = [];
 
         watchlistData.forEach((section) => {
             section.data.forEach((item) => {
+                totalMovies++;
                 if (item.watched) {
                     watchedCount++;
                 } else {
                     notWatchedCount++;
+                    notWatchedMovies.push(item.key);
                 }
             });
         });
 
-        // Display the result in an alert box
+        const notWatchedMoviesList = notWatchedMovies.join('\n');
+
         Alert.alert(
-            "Watchlist Stats",
-            `Watched Movies: ${watchedCount}\nNot Watched Movies: ${notWatchedCount}`,
+            "Watch-Yo-List Status",
+            `Total Movies: ${totalMovies}\nWatched Movies: ${watchedCount}\nNot Watched Movies: ${notWatchedCount}\n\nNot Watched Movies:\n${notWatchedMoviesList}`,
             [{ text: "OK" }]
         );
     };
@@ -75,7 +79,7 @@ export default function Home({ navigation }) {
         <View style={styles.container}>
             <StatusBar style="light" />
             <View style={styles.headerContainer}>
-                <Text style={styles.headerText}>Watchlist</Text>
+                <Text style={styles.headerText}>🍿 Watchlist 🎥</Text>
                 <Picker
                     selectedValue={selectedCategory}
                     onValueChange={(itemValue) => setSelectedCategory(itemValue)}
@@ -107,10 +111,9 @@ export default function Home({ navigation }) {
                 style={styles.addButton}
                 onPress={() => navigation.navigate('Add')}
             >
-                <Text style={styles.addButtonText}>Add New Movie</Text>
+                <Text style={styles.addButtonText}>Add Watchy</Text>
             </TouchableOpacity>
 
-            {/* Stats button */}
             <TouchableOpacity
                 style={styles.statsButton}
                 onPress={calculateStats}
@@ -174,10 +177,6 @@ const styles = StyleSheet.create({
         marginBottom: 15,
         backgroundColor: '#1A3A5A',
         borderRadius: 8,
-        shadowColor: '#000',
-        shadowOpacity: 0.2,
-        shadowRadius: 8,
-        elevation: 4,
     },
     itemImage: {
         width: 80,
@@ -186,7 +185,6 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         marginLeft: 15,
-        justifyContent: 'flex-start',
         flex: 1,
     },
     itemTitle: {
@@ -206,11 +204,11 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     notWatched: {
-        color: 'red',
+        color: 'orange',
         fontWeight: 'bold',
     },
     watched: {
-        color: 'yellow',
+        color: 'lightgreen',
         fontWeight: 'bold',
     },
     addButton: {
@@ -220,10 +218,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 20,
         right: 20,
-        shadowColor: '#000',
-        shadowOpacity: 0.2,
-        shadowRadius: 8,
-        elevation: 4,
     },
     addButtonText: {
         color: '#ffffff',
@@ -237,10 +231,6 @@ const styles = StyleSheet.create({
         position: 'absolute',
         bottom: 20,
         left: 20,
-        shadowColor: '#000',
-        shadowOpacity: 0.2,
-        shadowRadius: 8,
-        elevation: 4,
     },
     statsButtonText: {
         color: '#ffffff',
